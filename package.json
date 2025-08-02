@@ -1,0 +1,12 @@
+{
+  "name": "jenkins-demo-app",
+  "version": "1.0.0",
+  "description": "Basic Jenkins test app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Javier",
+  "license": "ISC"
+}
+
