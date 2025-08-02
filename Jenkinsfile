@@ -2,33 +2,34 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "jenkins-demo-app"
+        IMAGE_NAME = "jenkins-demo"
     }
 
     stages {
-        stage('Clone') {
+        stage('Clone repository') {
             steps {
-                git 'https://github.com/sl4yer/jenkins-demo.git'
+                git url: 'https://github.com/sl4yernic/jenkins-demo.git'
             }
         }
 
-        stage('Build') {
+        stage('Build Docker image') {
             steps {
-                echo "Building Docker image..."
-                sh "docker build -t $IMAGE_NAME:latest ."
+                script {
+                    sh "docker build -t ${IMAGE_NAME}:latest ."
+                }
             }
         }
 
-        stage('Test') {
+        stage('Run basic test') {
             steps {
-                echo "Running dummy tests..."
-                sh "echo OK"
+                echo 'Simulating test stage...'
+                sh 'echo "Tests passed!"'
             }
         }
 
-        stage('Cleanup') {
+        stage('Cleanup message') {
             steps {
-                echo "Done. You can now run: docker run -p 3000:3000 $IMAGE_NAME"
+                echo "Build completed. You can run: docker run -p 3000:3000 ${IMAGE_NAME}"
             }
         }
     }
